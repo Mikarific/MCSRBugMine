@@ -1,0 +1,10 @@
+{
+  "bugmine.config.title": "BugMine",
+  "bugmine.category.bug_fixes.name": "Bug Fixes",
+  "bugmine.category.bug_fixes.tooltip": "Bug Fixes for the 25w14craftmine snapshot.",
+  "bugmine.category.qol.name": "Quality of Life",
+  "bugmine.category.qol.tooltip": "Quality of Life changes for the 25w14craftmine snapshot.",
+  "bugmine.options.functional_shields.name": "Functional Shields",
+  "bugmine.options.functional_shields.description": "Restores the shield's ability to block attacks.",
+  "world.effect.locked": "Locked new Mine Ingredient: %s"
+}

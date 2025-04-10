@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "bugmine",
+  "version": "${version}",
+  "name": "BugMine",
+  "description": "Bug Fixes for 25w14craftmine.",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/bugmine/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.mikarific.bugmine.BugMine"
+    ],
+    "modmenu": [
+      "com.mikarific.bugmine.config.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "bugmine.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "1.21.6-alpha.25.14.craftmine"
+  }
+}
