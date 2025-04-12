@@ -24,6 +24,12 @@ public class Config {
     @SerialEntry
     public static boolean functionalShields = true;
 
+    @SerialEntry
+    public static boolean obtainableDragonFire = true;
+
+    @SerialEntry
+    public static boolean preventPacketDisconnect = true;
+
     public static void save() {
         HANDLER.save();
     }
@@ -38,18 +44,56 @@ public class Config {
             .category(ConfigCategory.createBuilder()
                 .name(Text.translatable("bugmine.category.bug_fixes.name"))
                 .tooltip(Text.translatable("bugmine.category.bug_fixes.tooltip"))
-                .option(Option.<Boolean>createBuilder()
-                    .name(Text.translatable("bugmine.options.functional_shields.name"))
-                    .description(OptionDescription.of(Text.translatable("bugmine.options.functional_shields.description")))
-                    .binding(
-                        functionalShields,
-                        () -> functionalShields,
-                        newVal -> {
-                            functionalShields = newVal;
-                            save();
-                        }
+//                .group(OptionGroup.createBuilder()
+//                    .name(Text.translatable("bugmine.group.client.name"))
+//                    .description(OptionDescription.of(Text.translatable("bugmine.group.client.description")))
+//                    .build()
+//                )
+                .group(OptionGroup.createBuilder()
+                    .name(Text.translatable("bugmine.group.server.name"))
+                    .description(OptionDescription.of(Text.translatable("bugmine.group.server.description")))
+                    .option(Option.<Boolean>createBuilder()
+                        .name(Text.translatable("bugmine.options.functionalShields.name"))
+                        .description(OptionDescription.of(Text.translatable("bugmine.options.functionalShields.description")))
+                        .binding(
+                            functionalShields,
+                            () -> functionalShields,
+                            newVal -> {
+                                functionalShields = newVal;
+                                save();
+                            }
+                        )
+                        .controller(TickBoxControllerBuilder::create)
+                        .build()
                     )
-                    .controller(TickBoxControllerBuilder::create)
+                    .option(Option.<Boolean>createBuilder()
+                        .name(Text.translatable("bugmine.options.obtainableDragonFire.name"))
+                        .description(OptionDescription.of(Text.translatable("bugmine.options.obtainableDragonFire.description")))
+                        .binding(
+                            obtainableDragonFire,
+                            () -> obtainableDragonFire,
+                            newVal -> {
+                                obtainableDragonFire = newVal;
+                                save();
+                            }
+                        )
+                        .controller(TickBoxControllerBuilder::create)
+                        .build()
+                    )
+                    .option(Option.<Boolean>createBuilder()
+                        .name(Text.translatable("bugmine.options.preventPacketDisconnect.name"))
+                        .description(OptionDescription.of(Text.translatable("bugmine.options.preventPacketDisconnect.description")))
+                        .binding(
+                            preventPacketDisconnect,
+                            () -> preventPacketDisconnect,
+                            newVal -> {
+                                preventPacketDisconnect = newVal;
+                                save();
+                            }
+                            )
+                            .controller(TickBoxControllerBuilder::create)
+                            .build()
+                        )
                     .build()
                 )
                 .build()
@@ -57,6 +101,16 @@ public class Config {
             .category(ConfigCategory.createBuilder()
                 .name(Text.translatable("bugmine.category.qol.name"))
                 .tooltip(Text.translatable("bugmine.category.qol.tooltip"))
+//                .group(OptionGroup.createBuilder()
+//                    .name(Text.translatable("bugmine.group.client.name"))
+//                    .description(OptionDescription.of(Text.translatable("bugmine.group.client.description")))
+//                    .build()
+//                )
+//                .group(OptionGroup.createBuilder()
+//                    .name(Text.translatable("bugmine.group.server.name"))
+//                    .description(OptionDescription.of(Text.translatable("bugmine.group.server.description")))
+//                    .build()
+//                )
                 .build()
             )
             .build()
