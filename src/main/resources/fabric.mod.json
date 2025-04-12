@@ -22,7 +22,17 @@
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
-    "fabric": "*",
-    "minecraft": "1.21.6-alpha.25.14.craftmine"
+    "minecraft": "1.21.6-alpha.25.14.craftmine",
+    "fabric": ">=${fabric_version}",
+    "yet_another_config_lib_v3": ">=${yacl_version}"
+  },
+  "suggests": {
+    "modmenu": ">=${modmenu_version}",
+    "speedrunapi": ">=${speedrunapi_version}"
+  },
+  "custom": {
+    "speedrunapi": {
+      "config": "com.mikarific.bugmine.config.SpeedrunIntegration"
+    }
   }
 }
