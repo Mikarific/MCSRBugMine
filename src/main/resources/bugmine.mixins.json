@@ -4,14 +4,16 @@
   "package": "com.mikarific.bugmine.mixins",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "accessor.LevelPropertiesAccessor",
+    "accessor.ServerPlayerEntityAccessor",
     "CommandManagerMixin",
     "EncoderHandlerMixin",
+    "MineCrafterScreenHandlerMixin",
     "PlayerUnlocksMixin",
     "ServerPlayerEntityMixin",
     "ShieldItemMixin",
     "WorldEffectMixin",
-    "accessor.LevelPropertiesAccessor",
-    "accessor.ServerPlayerEntityAccessor"
+    "WorldEffectsMixin"
   ],
   "injectors": {
     "defaultRequire": 1

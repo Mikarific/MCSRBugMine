@@ -31,10 +31,22 @@ public class Config {
     public static boolean obtainableDragonFire = true;
 
     @SerialEntry
+    public static boolean preventCtrlQFreeze = true;
+
+    @SerialEntry
+    public static boolean preventIngredientSwapping = true;
+
+    @SerialEntry
+    public static boolean preventIngredientThrowing = true;
+
+    @SerialEntry
     public static boolean preventPacketDisconnect = true;
 
     @SerialEntry
     public static boolean preventSoulLinkCrash = true;
+
+    @SerialEntry
+    public static boolean rabbitsSpawnsRabbits = true;
 
     public static void save() {
         HANDLER.save();
@@ -61,6 +73,48 @@ public class Config {
                             () -> allowSoulLinkOnLanServers,
                             newVal -> {
                                 allowSoulLinkOnLanServers = newVal;
+                                save();
+                            }
+                        )
+                        .controller(TickBoxControllerBuilder::create)
+                        .build()
+                    )
+                    .option(Option.<Boolean>createBuilder()
+                        .name(Text.translatable("bugmine.options.preventCtrlQFreeze.name"))
+                        .description(OptionDescription.of(Text.translatable("bugmine.options.preventCtrlQFreeze.description")))
+                        .binding(
+                            preventCtrlQFreeze,
+                            () -> preventCtrlQFreeze,
+                            newVal -> {
+                                preventCtrlQFreeze = newVal;
+                                save();
+                            }
+                        )
+                        .controller(TickBoxControllerBuilder::create)
+                        .build()
+                    )
+                    .option(Option.<Boolean>createBuilder()
+                        .name(Text.translatable("bugmine.options.preventIngredientSwapping.name"))
+                        .description(OptionDescription.of(Text.translatable("bugmine.options.preventIngredientSwapping.description")))
+                        .binding(
+                            preventIngredientSwapping,
+                            () -> preventIngredientSwapping,
+                            newVal -> {
+                                preventIngredientSwapping = newVal;
+                                save();
+                            }
+                        )
+                        .controller(TickBoxControllerBuilder::create)
+                        .build()
+                    )
+                    .option(Option.<Boolean>createBuilder()
+                        .name(Text.translatable("bugmine.options.preventIngredientThrowing.name"))
+                        .description(OptionDescription.of(Text.translatable("bugmine.options.preventIngredientThrowing.description")))
+                        .binding(
+                            preventIngredientThrowing,
+                            () -> preventIngredientThrowing,
+                            newVal -> {
+                                preventIngredientThrowing = newVal;
                                 save();
                             }
                         )
@@ -122,6 +176,20 @@ public class Config {
                             () -> preventSoulLinkCrash,
                             newVal -> {
                                 preventSoulLinkCrash = newVal;
+                                save();
+                            }
+                        )
+                        .controller(TickBoxControllerBuilder::create)
+                        .build()
+                    )
+                    .option(Option.<Boolean>createBuilder()
+                        .name(Text.translatable("bugmine.options.rabbitsSpawnsRabbits.name"))
+                        .description(OptionDescription.of(Text.translatable("bugmine.options.rabbitsSpawnsRabbits.description")))
+                        .binding(
+                            rabbitsSpawnsRabbits,
+                            () -> rabbitsSpawnsRabbits,
+                            newVal -> {
+                                rabbitsSpawnsRabbits = newVal;
                                 save();
                             }
                         )
