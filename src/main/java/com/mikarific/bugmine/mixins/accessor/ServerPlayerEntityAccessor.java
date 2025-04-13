@@ -1,4 +1,4 @@
-package com.mikarific.bugmine.mixins;
+package com.mikarific.bugmine.mixins.accessor;
 
 import net.minecraft.class_10959;
 import net.minecraft.server.network.ServerPlayerEntity;

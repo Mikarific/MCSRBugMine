@@ -1,4 +1,4 @@
-package com.mikarific.bugmine.mixins;
+package com.mikarific.bugmine.mixins.accessor;
 
 import net.minecraft.aprilfools.WorldEffect;
 import net.minecraft.world.level.LevelProperties;

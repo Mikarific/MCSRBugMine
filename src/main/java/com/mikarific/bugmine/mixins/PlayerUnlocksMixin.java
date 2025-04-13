@@ -15,7 +15,7 @@ import static net.minecraft.aprilfools.PlayerUnlocks.SORCERER_SUPREME;
 @Mixin(PlayerUnlocks.class)
 public class PlayerUnlocksMixin {
     @WrapMethod(method = "method_69247")
-    private static Boolean dragonFireVisibility(ServerWorld world, ServerPlayerEntity player, DamageSource damageSource, Float float_, Operation<Boolean> original) {
+    private static Boolean obtainableDragonFire(ServerWorld world, ServerPlayerEntity player, DamageSource damageSource, Float float_, Operation<Boolean> original) {
         boolean originalReturn = original.call(world, player, damageSource, float_);
         if (Config.obtainableDragonFire) {
             if (originalReturn) return true;

@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.Mixin;
 @Mixin(EncoderHandler.class)
 public class EncoderHandlerMixin<T extends PacketListener> {
     @WrapMethod(method = "encode(Lio/netty/channel/ChannelHandlerContext;Lnet/minecraft/network/packet/Packet;Lio/netty/buffer/ByteBuf;)V")
-    private void encode(ChannelHandlerContext channelHandlerContext, Packet<T> packet, ByteBuf byteBuf, Operation<Void> original) {
+    private void preventPacketDisconnect(ChannelHandlerContext channelHandlerContext, Packet<T> packet, ByteBuf byteBuf, Operation<Void> original) {
         try {
             original.call(channelHandlerContext, packet, byteBuf);
         } catch (Exception ignored) {

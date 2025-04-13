@@ -21,7 +21,7 @@ public class CommandManagerMixin {
     @Shadow @Final private CommandDispatcher<ServerCommandSource> dispatcher;
 
     @Inject(method = "<init>", at = @At(value = "INVOKE", target = "net/minecraft/server/command/AbstractServerCommandSource.asResultConsumer()Lcom/mojang/brigadier/ResultConsumer;"))
-    private void init(CommandManager.RegistrationEnvironment environment, CommandRegistryAccess registryAccess, CallbackInfo ci) {
+    private void register(CommandManager.RegistrationEnvironment environment, CommandRegistryAccess registryAccess, CallbackInfo ci) {
         BugMineCommand.register(this.dispatcher);
         IngredientCommand.register(this.dispatcher, registryAccess);
         UnlockCommand.register(this.dispatcher, registryAccess);
@@ -29,14 +29,14 @@ public class CommandManagerMixin {
     }
 
     @Redirect(method = "<init>", at = @At(value = "INVOKE", target = "net/minecraft/class_10963.method_69020(Lcom/mojang/brigadier/CommandDispatcher;Lnet/minecraft/command/CommandRegistryAccess;)V"))
-    private void levelCommand(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess) {}
+    private void disableLevelCommand(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess) {}
 
     @Redirect(method = "<init>", at = @At(value = "INVOKE", target = "net/minecraft/class_10964.method_69036(Lcom/mojang/brigadier/CommandDispatcher;)V"))
-    private void roomCommand(CommandDispatcher<ServerCommandSource> dispatcher) {}
+    private void disableRoomCommand(CommandDispatcher<ServerCommandSource> dispatcher) {}
 
     @Redirect(method = "<init>", at = @At(value = "INVOKE", target = "net/minecraft/class_10965.method_69048(Lcom/mojang/brigadier/CommandDispatcher;Lnet/minecraft/command/CommandRegistryAccess;)V"))
-    private void unlockCommand(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess) {}
+    private void disableUnlockCommand(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess) {}
 
     @Redirect(method = "<init>", at = @At(value = "INVOKE", target = "net/minecraft/class_10966.method_69052(Lcom/mojang/brigadier/CommandDispatcher;Lnet/minecraft/command/CommandRegistryAccess;)V"))
-    private void unlockWorldEffectCommand(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess) {}
+    private void disableUnlockWorldEffectCommand(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess) {}
 }

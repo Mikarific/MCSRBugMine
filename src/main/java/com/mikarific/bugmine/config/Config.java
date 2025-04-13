@@ -22,6 +22,9 @@ public class Config {
         .build();
 
     @SerialEntry
+    public static boolean allowSoulLinkOnLanServers = true;
+
+    @SerialEntry
     public static boolean functionalShields = true;
 
     @SerialEntry
@@ -29,6 +32,9 @@ public class Config {
 
     @SerialEntry
     public static boolean preventPacketDisconnect = true;
+
+    @SerialEntry
+    public static boolean preventSoulLinkCrash = true;
 
     public static void save() {
         HANDLER.save();
@@ -44,11 +50,25 @@ public class Config {
             .category(ConfigCategory.createBuilder()
                 .name(Text.translatable("bugmine.category.bug_fixes.name"))
                 .tooltip(Text.translatable("bugmine.category.bug_fixes.tooltip"))
-//                .group(OptionGroup.createBuilder()
-//                    .name(Text.translatable("bugmine.group.client.name"))
-//                    .description(OptionDescription.of(Text.translatable("bugmine.group.client.description")))
-//                    .build()
-//                )
+                .group(OptionGroup.createBuilder()
+                    .name(Text.translatable("bugmine.group.client.name"))
+                    .description(OptionDescription.of(Text.translatable("bugmine.group.client.description")))
+                    .option(Option.<Boolean>createBuilder()
+                        .name(Text.translatable("bugmine.options.allowSoulLinkOnLanServers.name"))
+                        .description(OptionDescription.of(Text.translatable("bugmine.options.allowSoulLinkOnLanServers.description")))
+                        .binding(
+                            allowSoulLinkOnLanServers,
+                            () -> allowSoulLinkOnLanServers,
+                            newVal -> {
+                                allowSoulLinkOnLanServers = newVal;
+                                save();
+                            }
+                        )
+                        .controller(TickBoxControllerBuilder::create)
+                        .build()
+                    )
+                    .build()
+                )
                 .group(OptionGroup.createBuilder()
                     .name(Text.translatable("bugmine.group.server.name"))
                     .description(OptionDescription.of(Text.translatable("bugmine.group.server.description")))
@@ -90,10 +110,24 @@ public class Config {
                                 preventPacketDisconnect = newVal;
                                 save();
                             }
-                            )
-                            .controller(TickBoxControllerBuilder::create)
-                            .build()
                         )
+                        .controller(TickBoxControllerBuilder::create)
+                        .build()
+                    )
+                    .option(Option.<Boolean>createBuilder()
+                        .name(Text.translatable("bugmine.options.preventSoulLinkCrash.name"))
+                        .description(OptionDescription.of(Text.translatable("bugmine.options.preventSoulLinkCrash.description")))
+                        .binding(
+                            preventSoulLinkCrash,
+                            () -> preventSoulLinkCrash,
+                            newVal -> {
+                                preventSoulLinkCrash = newVal;
+                                save();
+                            }
+                        )
+                        .controller(TickBoxControllerBuilder::create)
+                        .build()
+                    )
                     .build()
                 )
                 .build()

@@ -6,10 +6,12 @@
   "mixins": [
     "CommandManagerMixin",
     "EncoderHandlerMixin",
-    "LevelPropertiesAccessor",
     "PlayerUnlocksMixin",
-    "ServerPlayerEntityAccessor",
-    "ShieldItemMixin"
+    "ServerPlayerEntityMixin",
+    "ShieldItemMixin",
+    "WorldEffectMixin",
+    "accessor.LevelPropertiesAccessor",
+    "accessor.ServerPlayerEntityAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
