@@ -187,7 +187,7 @@ public class Config {
                                 )
                                 .option(Option.<Boolean>createBuilder()
                                         .name(Text.translatable("bugmine.options.obtainableNoDrops.name"))
-                                        .description(OptionDescription.of(Text.translatable("bugmine.options.obtainableInItTogether.description")))
+                                        .description(OptionDescription.of(Text.translatable("bugmine.options.obtainableNoDrops.description")))
                                         .available(ClientNetworkingHandler.isOnServer() && isAvailableOnServer())
                                         .binding(
                                                 obtainableNoDrops,

@@ -8,7 +8,9 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.logging.LogUtils;
+import net.fabricmc.api.EnvType;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Style;
@@ -24,7 +26,7 @@ import static net.minecraft.server.command.CommandManager.literal;
 public class BugMineCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(literal("bugmine")
-            .requires((source) -> source.hasPermissionLevel(2))
+            .requires((source) -> FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT || source.hasPermissionLevel(2))
             .then(argument("option", StringArgumentType.word())
                 .suggests((context, builder) -> suggestMatching(Config.getOptions(), builder))
                 .executes(context -> showOption(context.getSource(), StringArgumentType.getString(context, "option")))
