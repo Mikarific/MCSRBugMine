@@ -31,6 +31,9 @@ public class Config {
     public static boolean obtainableDragonFire = true;
 
     @SerialEntry
+    public static boolean obtainableNoDrops = true;
+
+    @SerialEntry
     public static boolean preventCtrlQFreeze = true;
 
     @SerialEntry
@@ -148,6 +151,20 @@ public class Config {
                             () -> obtainableDragonFire,
                             newVal -> {
                                 obtainableDragonFire = newVal;
+                                save();
+                            }
+                        )
+                        .controller(TickBoxControllerBuilder::create)
+                        .build()
+                    )
+                    .option(Option.<Boolean>createBuilder()
+                        .name(Text.translatable("bugmine.options.obtainableNoDrops.name"))
+                        .description(OptionDescription.of(Text.translatable("bugmine.options.obtainableNoDrops.description")))
+                        .binding(
+                            obtainableNoDrops,
+                            () -> obtainableNoDrops,
+                            newVal -> {
+                                obtainableNoDrops = newVal;
                                 save();
                             }
                         )
