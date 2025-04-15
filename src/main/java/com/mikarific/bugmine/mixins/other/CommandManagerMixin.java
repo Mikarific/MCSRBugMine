@@ -1,4 +1,4 @@
-package com.mikarific.bugmine.mixins;
+package com.mikarific.bugmine.mixins.other;
 
 import com.mikarific.bugmine.commands.BugMineCommand;
 import com.mikarific.bugmine.commands.IngredientCommand;

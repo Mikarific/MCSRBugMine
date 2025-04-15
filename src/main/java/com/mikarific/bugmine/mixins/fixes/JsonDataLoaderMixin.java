@@ -1,4 +1,4 @@
-package com.mikarific.bugmine.mixins;
+package com.mikarific.bugmine.mixins.fixes;
 
 import com.mikarific.bugmine.config.Config;
 import net.minecraft.advancement.Advancement;
@@ -31,6 +31,7 @@ public abstract class JsonDataLoaderMixin<T> extends SinglePreparationResourceRe
 
                 AdvancementDisplay display = inItTogether.display().get();
                 AdvancementDisplay fixedDisplay = new AdvancementDisplay(display.getIcon(), display.getTitle(), Text.translatable("bugmine.advancements.unlocks.in_it_together.description"), Text.translatable("bugmine.advancements.unlocks.in_it_together.description"), display.getBackground(), display.getFrame(), display.shouldShowToast(), display.shouldAnnounceToChat(), display.isHidden());
+                fixedDisplay.setPos(display.getX(), display.getY());
 
                 Map<String, AdvancementCriterion<?>> fixedCriteria = Map.of("complete_level", TickCriterion.Conditions.createLevelCompleted());
 

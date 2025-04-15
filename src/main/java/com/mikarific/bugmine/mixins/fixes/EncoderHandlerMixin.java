@@ -1,4 +1,4 @@
-package com.mikarific.bugmine.mixins;
+package com.mikarific.bugmine.mixins.fixes;
 
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;

@@ -4,7 +4,8 @@ import com.google.gson.GsonBuilder;
 import com.mikarific.bugmine.config.annotations.Client;
 import com.mikarific.bugmine.config.annotations.Server;
 import com.mikarific.bugmine.config.annotations.TriggerReload;
-import com.mikarific.bugmine.networking.BugMineConfigPayloadC2S;
+import com.mikarific.bugmine.networking.ClientNetworkingHandler;
+import com.mikarific.bugmine.networking.payloads.BugMineConfigPayloadC2S;
 import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
@@ -74,7 +75,7 @@ public class Config {
 
     private static boolean isAvailable() {
         if (MinecraftClient.getInstance().getCurrentServerEntry() != null) {
-            return MinecraftClient.getInstance().player != null && MinecraftClient.getInstance().player.hasPermissionLevel(2);
+            return ClientNetworkingHandler.isOnServer() && MinecraftClient.getInstance().player != null && MinecraftClient.getInstance().player.hasPermissionLevel(2);
         } else {
             return true;
         }
@@ -95,7 +96,7 @@ public class Config {
                                         .available(isAvailable() && (MinecraftClient.getInstance().getServer() != null || MinecraftClient.getInstance().getCurrentServerEntry() == null))
                                         .binding(
                                                 allowSoulLinkOnLanServers,
-                                                () -> allowSoulLinkOnLanServers,
+                                                () -> MinecraftClient.getInstance().getCurrentServerEntry() == null && allowSoulLinkOnLanServers,
                                                 newVal -> {
                                                     allowSoulLinkOnLanServers = newVal;
                                                     if (MinecraftClient.getInstance().getCurrentServerEntry() != null) {

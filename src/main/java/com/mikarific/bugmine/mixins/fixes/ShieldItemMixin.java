@@ -1,4 +1,4 @@
-package com.mikarific.bugmine.mixins;
+package com.mikarific.bugmine.mixins.fixes;
 
 import com.mikarific.bugmine.config.Config;
 import net.minecraft.entity.player.PlayerEntity;

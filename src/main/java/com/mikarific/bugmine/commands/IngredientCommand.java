@@ -1,6 +1,6 @@
 package com.mikarific.bugmine.commands;
 
-import com.mikarific.bugmine.mixins.accessor.LevelPropertiesAccessor;
+import com.mikarific.bugmine.mixins.fixes.accessor.LevelPropertiesAccessor;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.aprilfools.UnlockCondition;
 import net.minecraft.aprilfools.UnlockMode;

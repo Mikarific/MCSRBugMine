@@ -1,6 +1,6 @@
 package com.mikarific.bugmine.commands;
 
-import com.mikarific.bugmine.mixins.accessor.ServerPlayerEntityAccessor;
+import com.mikarific.bugmine.mixins.fixes.accessor.ServerPlayerEntityAccessor;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.advancement.AdvancementDisplay;
 import net.minecraft.aprilfools.PlayerUnlock;

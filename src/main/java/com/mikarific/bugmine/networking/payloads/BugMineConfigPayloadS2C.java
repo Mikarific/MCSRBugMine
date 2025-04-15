@@ -1,4 +1,4 @@
-package com.mikarific.bugmine.networking;
+package com.mikarific.bugmine.networking.payloads;
 
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
