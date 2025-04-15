@@ -14,6 +14,8 @@
   "bugmine.options.functionalShields.description": "Restores the shield's ability to block attacks.",
   "bugmine.options.obtainableDragonFire.name": "Obtainable Dragon Fire",
   "bugmine.options.obtainableDragonFire.description": "Makes the dragon fire player unlock available by getting damaged from an Ender Dragon's area effect cloud rather than directly from its fireball.",
+  "bugmine.options.obtainableInItTogether.name": "Obtainable In It Together",
+  "bugmine.options.obtainableInItTogether.description": "Makes In It Together obtainable by changing the requirement from winning a special mine to winning any mine.",
   "bugmine.options.obtainableNoDrops.name": "Obtainable No Drops",
   "bugmine.options.obtainableNoDrops.description": "Gives the No Drops mine ingredient an unlock condition. According to etanaratsastaja, software engineer at Mojang, it was originally dropped randomly from mobs with a 5% chance, so that's the unlock condition provided here.",
   "bugmine.options.preventCtrlQFreeze.name": "Prevent Ctrl+Q Freeze",
@@ -29,6 +31,7 @@
   "bugmine.options.rabbitsSpawnsRabbits.name": "Rabbits Spawns Rabbits",
   "bugmine.options.rabbitsSpawnsRabbits.description": "Makes the \"Rabbits\" mine ingredient spawn rabbits instead of parrots.",
   "bugmine.config.reloaded": "§2§l[BugMine] §rBugMine Config Reloaded!",
+  "bugmine.advancements.unlocks.in_it_together.description": "Complete a mine with the 'Soul Link' effect active",
   "unlocks.player.locked": "🔒 %s locked %s",
   "world.effect.locked": "Locked new Mine Ingredient: %s"
 }

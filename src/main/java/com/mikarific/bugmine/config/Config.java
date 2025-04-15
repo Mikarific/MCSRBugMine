@@ -1,13 +1,16 @@
 package com.mikarific.bugmine.config;
 
 import com.google.gson.GsonBuilder;
+import com.mojang.logging.LogUtils;
 import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.server.GameInstance;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
@@ -29,6 +32,9 @@ public class Config {
 
     @SerialEntry
     public static boolean obtainableDragonFire = true;
+
+    @SerialEntry
+    public static boolean obtainableInItTogether = true;
 
     @SerialEntry
     public static boolean obtainableNoDrops = true;
@@ -151,6 +157,25 @@ public class Config {
                             () -> obtainableDragonFire,
                             newVal -> {
                                 obtainableDragonFire = newVal;
+                                save();
+                            }
+                        )
+                        .controller(TickBoxControllerBuilder::create)
+                        .build()
+                    )
+                    .option(Option.<Boolean>createBuilder()
+                        .name(Text.translatable("bugmine.options.obtainableInItTogether.name"))
+                        .description(OptionDescription.of(Text.translatable("bugmine.options.obtainableInItTogether.description")))
+                        .binding(
+                            obtainableInItTogether,
+                            () -> obtainableInItTogether,
+                            newVal -> {
+                                obtainableInItTogether = newVal;
+                                GameInstance gameInstance = MinecraftClient.getInstance().method_70242();
+                                if (gameInstance != null) gameInstance.reloadResources(gameInstance.getDataPackManager().getEnabledIds()).exceptionally((throwable) -> {
+                                    LogUtils.getLogger().warn("Failed to execute reload", throwable);
+                                    return null;
+                                });
                                 save();
                             }
                         )

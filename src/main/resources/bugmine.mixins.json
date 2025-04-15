@@ -8,6 +8,7 @@
     "accessor.ServerPlayerEntityAccessor",
     "CommandManagerMixin",
     "EncoderHandlerMixin",
+    "JsonDataLoaderMixin",
     "MineCrafterScreenHandlerMixin",
     "PlayerUnlocksMixin",
     "ServerPlayerEntityMixin",
