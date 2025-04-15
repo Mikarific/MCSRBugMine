@@ -51,9 +51,7 @@ public class ServerNetworkingHandler {
             }
         }));
 
-        ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> {
-            MATCHING_PLAYERS.remove(handler.getPlayer().getUuid());
-        });
+        ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> MATCHING_PLAYERS.remove(handler.getPlayer().getUuid()));
 
         ServerPlayNetworking.registerGlobalReceiver(BugMineConfigPayloadC2S.ID, (payload, context) -> context.server().execute(() -> {
             if (context.player().hasPermissionLevel(2)) {

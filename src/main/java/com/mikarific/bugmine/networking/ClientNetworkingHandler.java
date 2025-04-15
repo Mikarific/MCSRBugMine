@@ -15,17 +15,11 @@ public class ClientNetworkingHandler {
     private static boolean MATCHING_SERVER = false;
 
     public static void register() {
-        ClientPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
-            ClientPlayNetworking.send(new BugMineInitPayloadC2S(VERSION));
-        });
+        ClientPlayConnectionEvents.JOIN.register((handler, sender, server) -> ClientPlayNetworking.send(new BugMineInitPayloadC2S(VERSION)));
 
-        ClientPlayNetworking.registerGlobalReceiver(BugMineInitPayloadS2C.ID, (payload, context) -> context.client().execute(() -> {
-            MATCHING_SERVER = true;
-        }));
+        ClientPlayNetworking.registerGlobalReceiver(BugMineInitPayloadS2C.ID, (payload, context) -> context.client().execute(() -> MATCHING_SERVER = true));
 
-        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
-            MATCHING_SERVER = false;
-        });
+        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> MATCHING_SERVER = false);
 
         ClientPlayNetworking.registerGlobalReceiver(BugMineConfigPayloadS2C.ID, (payload, context) -> context.client().execute(() -> {
             try {
