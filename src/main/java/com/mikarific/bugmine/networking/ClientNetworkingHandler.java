@@ -19,7 +19,10 @@ public class ClientNetworkingHandler {
 
         ClientPlayNetworking.registerGlobalReceiver(BugMineInitPayloadS2C.ID, (payload, context) -> context.client().execute(() -> MATCHING_SERVER = true));
 
-        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> MATCHING_SERVER = false);
+        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
+            MATCHING_SERVER = false;
+            Config.load();
+        });
 
         ClientPlayNetworking.registerGlobalReceiver(BugMineConfigPayloadS2C.ID, (payload, context) -> context.client().execute(() -> {
             try {

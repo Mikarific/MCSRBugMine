@@ -73,9 +73,9 @@ public class Config {
         HANDLER.load();
     }
 
-    private static boolean isAvailable() {
+    private static boolean isAvailableOnServer() {
         if (MinecraftClient.getInstance().getCurrentServerEntry() != null) {
-            return ClientNetworkingHandler.isOnServer() && MinecraftClient.getInstance().player != null && MinecraftClient.getInstance().player.hasPermissionLevel(2);
+            return MinecraftClient.getInstance().player != null && MinecraftClient.getInstance().player.hasPermissionLevel(2);
         } else {
             return true;
         }
@@ -93,15 +93,13 @@ public class Config {
                                 .option(Option.<Boolean>createBuilder()
                                         .name(Text.translatable("bugmine.options.allowSoulLinkOnLanServers.name"))
                                         .description(OptionDescription.of(Text.translatable("bugmine.options.allowSoulLinkOnLanServers.description")))
-                                        .available(isAvailable() && (MinecraftClient.getInstance().getServer() != null || MinecraftClient.getInstance().getCurrentServerEntry() == null))
+                                        .available(isAvailableOnServer() && (MinecraftClient.getInstance().getServer() != null || MinecraftClient.getInstance().getCurrentServerEntry() == null))
                                         .binding(
                                                 allowSoulLinkOnLanServers,
                                                 () -> MinecraftClient.getInstance().getCurrentServerEntry() == null && allowSoulLinkOnLanServers,
                                                 newVal -> {
                                                     allowSoulLinkOnLanServers = newVal;
-                                                    if (MinecraftClient.getInstance().getCurrentServerEntry() != null) {
-                                                        ClientPlayNetworking.send(new BugMineConfigPayloadC2S("allowSoulLinkOnLanServers", newVal.toString()));
-                                                    } else {
+                                                    if (MinecraftClient.getInstance().getCurrentServerEntry() == null) {
                                                         save();
                                                     }
                                                 }
@@ -112,15 +110,12 @@ public class Config {
                                 .option(Option.<Boolean>createBuilder()
                                         .name(Text.translatable("bugmine.options.preventCtrlQFreeze.name"))
                                         .description(OptionDescription.of(Text.translatable("bugmine.options.preventCtrlQFreeze.description")))
-                                        .available(isAvailable())
                                         .binding(
                                                 preventCtrlQFreeze,
                                                 () -> preventCtrlQFreeze,
                                                 newVal -> {
                                                     preventCtrlQFreeze = newVal;
-                                                    if (MinecraftClient.getInstance().getCurrentServerEntry() != null) {
-                                                        ClientPlayNetworking.send(new BugMineConfigPayloadC2S("preventCtrlQFreeze", newVal.toString()));
-                                                    } else {
+                                                    if (MinecraftClient.getInstance().getCurrentServerEntry() == null) {
                                                         save();
                                                     }
                                                 }
@@ -136,7 +131,7 @@ public class Config {
                                 .option(Option.<Boolean>createBuilder()
                                         .name(Text.translatable("bugmine.options.functionalShields.name"))
                                         .description(OptionDescription.of(Text.translatable("bugmine.options.functionalShields.description")))
-                                        .available(isAvailable())
+                                        .available(ClientNetworkingHandler.isOnServer() && isAvailableOnServer())
                                         .binding(
                                                 functionalShields,
                                                 () -> functionalShields,
@@ -155,7 +150,7 @@ public class Config {
                                 .option(Option.<Boolean>createBuilder()
                                         .name(Text.translatable("bugmine.options.obtainableDragonFire.name"))
                                         .description(OptionDescription.of(Text.translatable("bugmine.options.obtainableDragonFire.description")))
-                                        .available(isAvailable())
+                                        .available(ClientNetworkingHandler.isOnServer() && isAvailableOnServer())
                                         .binding(
                                                 obtainableDragonFire,
                                                 () -> obtainableDragonFire,
@@ -174,7 +169,7 @@ public class Config {
                                 .option(Option.<Boolean>createBuilder()
                                         .name(Text.translatable("bugmine.options.obtainableInItTogether.name"))
                                         .description(OptionDescription.of(Text.translatable("bugmine.options.obtainableInItTogether.description")))
-                                        .available(isAvailable())
+                                        .available(ClientNetworkingHandler.isOnServer() && isAvailableOnServer())
                                         .binding(
                                                 obtainableInItTogether,
                                                 () -> obtainableInItTogether,
@@ -193,7 +188,7 @@ public class Config {
                                 .option(Option.<Boolean>createBuilder()
                                         .name(Text.translatable("bugmine.options.obtainableNoDrops.name"))
                                         .description(OptionDescription.of(Text.translatable("bugmine.options.obtainableInItTogether.description")))
-                                        .available(isAvailable())
+                                        .available(ClientNetworkingHandler.isOnServer() && isAvailableOnServer())
                                         .binding(
                                                 obtainableNoDrops,
                                                 () -> obtainableNoDrops,
@@ -212,7 +207,7 @@ public class Config {
                                 .option(Option.<Boolean>createBuilder()
                                         .name(Text.translatable("bugmine.options.preventIngredientSwapping.name"))
                                         .description(OptionDescription.of(Text.translatable("bugmine.options.preventIngredientSwapping.description")))
-                                        .available(isAvailable())
+                                        .available(ClientNetworkingHandler.isOnServer() && isAvailableOnServer())
                                         .binding(
                                                 preventIngredientSwapping,
                                                 () -> preventIngredientSwapping,
@@ -231,7 +226,7 @@ public class Config {
                                 .option(Option.<Boolean>createBuilder()
                                         .name(Text.translatable("bugmine.options.preventIngredientThrowing.name"))
                                         .description(OptionDescription.of(Text.translatable("bugmine.options.preventIngredientThrowing.description")))
-                                        .available(isAvailable())
+                                        .available(ClientNetworkingHandler.isOnServer() && isAvailableOnServer())
                                         .binding(
                                                 preventIngredientThrowing,
                                                 () -> preventIngredientThrowing,
@@ -250,7 +245,7 @@ public class Config {
                                 .option(Option.<Boolean>createBuilder()
                                         .name(Text.translatable("bugmine.options.preventPacketDisconnect.name"))
                                         .description(OptionDescription.of(Text.translatable("bugmine.options.preventPacketDisconnect.description")))
-                                        .available(isAvailable())
+                                        .available(ClientNetworkingHandler.isOnServer() && isAvailableOnServer())
                                         .binding(
                                                 preventPacketDisconnect,
                                                 () -> preventPacketDisconnect,
@@ -269,7 +264,7 @@ public class Config {
                                 .option(Option.<Boolean>createBuilder()
                                         .name(Text.translatable("bugmine.options.preventSoulLinkCrash.name"))
                                         .description(OptionDescription.of(Text.translatable("bugmine.options.preventSoulLinkCrash.description")))
-                                        .available(isAvailable())
+                                        .available(ClientNetworkingHandler.isOnServer() && isAvailableOnServer())
                                         .binding(
                                                 preventSoulLinkCrash,
                                                 () -> preventSoulLinkCrash,
@@ -288,7 +283,7 @@ public class Config {
                                 .option(Option.<Boolean>createBuilder()
                                         .name(Text.translatable("bugmine.options.rabbitsSpawnsRabbits.name"))
                                         .description(OptionDescription.of(Text.translatable("bugmine.options.rabbitsSpawnsRabbits.description")))
-                                        .available(isAvailable())
+                                        .available(ClientNetworkingHandler.isOnServer() && isAvailableOnServer())
                                         .binding(
                                                 rabbitsSpawnsRabbits,
                                                 () -> rabbitsSpawnsRabbits,

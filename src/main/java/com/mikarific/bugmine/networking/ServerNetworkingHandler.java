@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mikarific.bugmine.config.Config;
+import com.mikarific.bugmine.config.annotations.Server;
 import com.mikarific.bugmine.networking.payloads.BugMineConfigPayloadC2S;
 import com.mikarific.bugmine.networking.payloads.BugMineConfigPayloadS2C;
 import com.mikarific.bugmine.networking.payloads.BugMineInitPayloadC2S;
@@ -56,14 +57,16 @@ public class ServerNetworkingHandler {
         ServerPlayNetworking.registerGlobalReceiver(BugMineConfigPayloadC2S.ID, (payload, context) -> context.server().execute(() -> {
             if (context.player().hasPermissionLevel(2)) {
                 try {
-                    Object parsedValue = null;
-                    if (Config.class.getField(payload.option()).getType() == boolean.class) parsedValue = Arrays.asList(Config.getValues(payload.option())).contains(payload.value().toLowerCase()) ? Boolean.parseBoolean(payload.value()) : null;
-                    if (parsedValue != null) {
-                        Config.class.getField(payload.option()).set(null, parsedValue);
-                        Config.save();
-                        if (context.server().getGameInstance() != null) {
-                            for (ServerPlayerEntity player : getPlayersWithClientMod(Objects.requireNonNull(context.server().getGameInstance()).getPlayerManager())) {
-                                ServerPlayNetworking.send(player, new BugMineConfigPayloadS2C(payload.option(), parsedValue.toString()));
+                    if (Config.class.getField(payload.option()).isAnnotationPresent(Server.class)) {
+                        Object parsedValue = null;
+                        if (Config.class.getField(payload.option()).getType() == boolean.class) parsedValue = Arrays.asList(Config.getValues(payload.option())).contains(payload.value().toLowerCase()) ? Boolean.parseBoolean(payload.value()) : null;
+                        if (parsedValue != null) {
+                            Config.class.getField(payload.option()).set(null, parsedValue);
+                            Config.save();
+                            if (context.server().getGameInstance() != null) {
+                                for (ServerPlayerEntity player : getPlayersWithClientMod(Objects.requireNonNull(context.server().getGameInstance()).getPlayerManager())) {
+                                    ServerPlayNetworking.send(player, new BugMineConfigPayloadS2C(payload.option(), parsedValue.toString()));
+                                }
                             }
                         }
                     }
