@@ -21,9 +21,6 @@ public class WorldEffectsMixin {
 
     @WrapOperation(method = "<clinit>", slice = @Slice(from = @At(value = "CONSTANT", args = "stringValue=no_drops")), at = @At(value = "INVOKE", target = "net/minecraft/aprilfools/WorldEffect$Builder.buildAndRegister()Lnet/minecraft/aprilfools/WorldEffect;", ordinal = 0))
     private static WorldEffect obtainableNoDrops(WorldEffect.Builder builder, Operation<WorldEffect> original) {
-        if (Config.obtainableNoDrops) {
-            return original.call(builder.unlockedByCondition(UnlockCondition.method_69651((world, player, entity) -> world.getRandom().nextFloat() < 0.05F)));
-        }
-        return original.call(builder);
+        return original.call(builder.unlockedByCondition(UnlockCondition.method_69651((world, player, entity) -> Config.obtainableNoDrops && world.getRandom().nextFloat() < 0.05F)));
     }
 }

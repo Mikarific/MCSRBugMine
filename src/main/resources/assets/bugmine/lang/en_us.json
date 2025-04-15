@@ -30,7 +30,6 @@
   "bugmine.options.preventSoulLinkCrash.description": "No longer crash upon taking damage with soul link active.",
   "bugmine.options.rabbitsSpawnsRabbits.name": "Rabbits Spawns Rabbits",
   "bugmine.options.rabbitsSpawnsRabbits.description": "Makes the \"Rabbits\" mine ingredient spawn rabbits instead of parrots.",
-  "bugmine.config.reloaded": "§2§l[BugMine] §rBugMine Config Reloaded!",
   "bugmine.advancements.unlocks.in_it_together.description": "Complete a mine with the 'Soul Link' effect active",
   "unlocks.player.locked": "🔒 %s locked %s",
   "world.effect.locked": "Locked new Mine Ingredient: %s"

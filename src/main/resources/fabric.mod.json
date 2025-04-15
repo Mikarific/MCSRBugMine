@@ -10,6 +10,9 @@
   "icon": "assets/bugmine/icon.png",
   "environment": "*",
   "entrypoints": {
+    "client": [
+      "com.mikarific.bugmine.BugMineClient"
+    ],
     "main": [
       "com.mikarific.bugmine.BugMine"
     ],
