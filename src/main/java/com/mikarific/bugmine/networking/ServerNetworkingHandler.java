@@ -3,8 +3,7 @@ package com.mikarific.bugmine.networking;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.mikarific.bugmine.config.Config;
-import com.mikarific.bugmine.config.annotations.Server;
+import com.mikarific.bugmine.config.ServerConfig;
 import com.mikarific.bugmine.networking.payloads.BugMineConfigPayloadC2S;
 import com.mikarific.bugmine.networking.payloads.BugMineConfigPayloadS2C;
 import com.mikarific.bugmine.networking.payloads.BugMineInitPayloadC2S;
@@ -42,9 +41,9 @@ public class ServerNetworkingHandler {
         ServerPlayNetworking.registerGlobalReceiver(BugMineInitPayloadC2S.ID, (payload, context) -> context.server().execute(() -> {
             MATCHING_PLAYERS.add(context.player().getUuid());
             ServerPlayNetworking.send(context.player(), new BugMineInitPayloadS2C(VERSION));
-            for (String option : Config.getOptions()) {
+            for (String option : ServerConfig.getOptions()) {
                 try {
-                    Object value = Config.class.getField(option).get(null);
+                    Object value = ServerConfig.class.getField(option).get(null);
                     ServerPlayNetworking.send(context.player(), new BugMineConfigPayloadS2C(option, value.toString()));
                 } catch (NoSuchFieldException | IllegalAccessException e) {
                     e.printStackTrace();
@@ -57,16 +56,14 @@ public class ServerNetworkingHandler {
         ServerPlayNetworking.registerGlobalReceiver(BugMineConfigPayloadC2S.ID, (payload, context) -> context.server().execute(() -> {
             if (context.player().hasPermissionLevel(2)) {
                 try {
-                    if (Config.class.getField(payload.option()).isAnnotationPresent(Server.class)) {
-                        Object parsedValue = null;
-                        if (Config.class.getField(payload.option()).getType() == boolean.class) parsedValue = Arrays.asList(Config.getValues(payload.option())).contains(payload.value().toLowerCase()) ? Boolean.parseBoolean(payload.value()) : null;
-                        if (parsedValue != null) {
-                            Config.class.getField(payload.option()).set(null, parsedValue);
-                            Config.save();
-                            if (context.server().getGameInstance() != null) {
-                                for (ServerPlayerEntity player : getPlayersWithClientMod(Objects.requireNonNull(context.server().getGameInstance()).getPlayerManager())) {
-                                    ServerPlayNetworking.send(player, new BugMineConfigPayloadS2C(payload.option(), parsedValue.toString()));
-                                }
+                    Object parsedValue = null;
+                    if (ServerConfig.class.getField(payload.option()).getType() == boolean.class) parsedValue = Arrays.asList(ServerConfig.getValues(payload.option())).contains(payload.value().toLowerCase()) ? Boolean.parseBoolean(payload.value()) : null;
+                    if (parsedValue != null) {
+                        ServerConfig.class.getField(payload.option()).set(null, parsedValue);
+                        ServerConfig.save();
+                        if (context.server().getGameInstance() != null) {
+                            for (ServerPlayerEntity player : getPlayersWithClientMod(Objects.requireNonNull(context.server().getGameInstance()).getPlayerManager())) {
+                                ServerPlayNetworking.send(player, new BugMineConfigPayloadS2C(payload.option(), parsedValue.toString()));
                             }
                         }
                     }

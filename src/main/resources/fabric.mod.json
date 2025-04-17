@@ -17,7 +17,7 @@
       "com.mikarific.bugmine.BugMine"
     ],
     "modmenu": [
-      "com.mikarific.bugmine.config.ModMenuIntegration"
+      "com.mikarific.bugmine.config.integrations.ModMenuIntegration"
     ]
   },
   "mixins": [
@@ -35,7 +35,7 @@
   },
   "custom": {
     "speedrunapi": {
-      "config": "com.mikarific.bugmine.config.SpeedrunIntegration"
+      "config": "com.mikarific.bugmine.config.integrations.SpeedrunIntegration"
     }
   }
 }

@@ -1,6 +1,6 @@
 package com.mikarific.bugmine.mixins.fixes;
 
-import com.mikarific.bugmine.config.Config;
+import com.mikarific.bugmine.config.ServerConfig;
 import net.minecraft.advancement.Advancement;
 import net.minecraft.advancement.AdvancementCriterion;
 import net.minecraft.advancement.AdvancementDisplay;
@@ -25,7 +25,7 @@ import java.util.Optional;
 public abstract class JsonDataLoaderMixin<T> extends SinglePreparationResourceReloader<Map<Identifier, T>> {
     @Inject(method = "prepare(Lnet/minecraft/resource/ResourceManager;Lnet/minecraft/util/profiler/Profiler;)Ljava/util/Map;", at = @At("RETURN"))
     private void obtainableInItTogether(ResourceManager resourceManager, Profiler profiler, CallbackInfoReturnable<Map<Identifier, Advancement>> cir) {
-        if (Config.obtainableInItTogether) {
+        if (ServerConfig.obtainableInItTogether) {
             if (((Object)this) instanceof ServerAdvancementLoader) {
                 Map<Identifier, Advancement> advancements = cir.getReturnValue();
                 Advancement inItTogether = advancements.get(new Identifier("minecraft", "unlocks/in_it_together"));

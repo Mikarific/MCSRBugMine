@@ -2,7 +2,7 @@ package com.mikarific.bugmine.mixins.fixes;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.mikarific.bugmine.config.Config;
+import com.mikarific.bugmine.config.ServerConfig;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -17,12 +17,12 @@ public class ServerPlayerEntityMixin {
     @Unique private static ServerPlayerEntity lastDamaged = null;
     @Inject(method = "damage", at = @At("HEAD"))
     private void preventSoulLinkCrash(ServerWorld world, DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        if (Config.preventSoulLinkCrash && lastDamaged == null) lastDamaged = (ServerPlayerEntity)(Object)this;
+        if (ServerConfig.preventSoulLinkCrash && lastDamaged == null) lastDamaged = (ServerPlayerEntity)(Object)this;
     }
 
     @WrapOperation(method = "damage", at = @At(value = "INVOKE", target = "net/minecraft/server/network/ServerPlayerEntity.damage(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/damage/DamageSource;F)Z"))
     private boolean preventSoulLinkCrash(ServerPlayerEntity player, ServerWorld world, DamageSource source, float amount, Operation<Boolean> original) {
-        if (Config.preventSoulLinkCrash && player == lastDamaged) {
+        if (ServerConfig.preventSoulLinkCrash && player == lastDamaged) {
             lastDamaged = null;
             return false;
         }

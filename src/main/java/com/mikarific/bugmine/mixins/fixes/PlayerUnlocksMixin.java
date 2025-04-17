@@ -2,7 +2,7 @@ package com.mikarific.bugmine.mixins.fixes;
 
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.mikarific.bugmine.config.Config;
+import com.mikarific.bugmine.config.ServerConfig;
 import net.minecraft.aprilfools.PlayerUnlocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
@@ -17,7 +17,7 @@ public class PlayerUnlocksMixin {
     @WrapMethod(method = "method_69247")
     private static Boolean obtainableDragonFire(ServerWorld world, ServerPlayerEntity player, DamageSource damageSource, Float float_, Operation<Boolean> original) {
         boolean originalReturn = original.call(world, player, damageSource, float_);
-        if (Config.obtainableDragonFire) {
+        if (ServerConfig.obtainableDragonFire) {
             if (originalReturn) return true;
             if (player.method_69135(SORCERER_SUPREME)) {
                 if (damageSource.getSource() != null && damageSource.getSource().getType() == EntityType.AREA_EFFECT_CLOUD) {

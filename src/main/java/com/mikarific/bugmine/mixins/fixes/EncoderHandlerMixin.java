@@ -2,7 +2,7 @@ package com.mikarific.bugmine.mixins.fixes;
 
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.mikarific.bugmine.config.Config;
+import com.mikarific.bugmine.config.ServerConfig;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.network.handler.EncoderHandler;
@@ -17,7 +17,7 @@ public class EncoderHandlerMixin<T extends PacketListener> {
         try {
             original.call(channelHandlerContext, packet, byteBuf);
         } catch (Exception ignored) {
-            if (Config.preventPacketDisconnect) {
+            if (ServerConfig.preventPacketDisconnect) {
                 ignored.printStackTrace();
             } else {
                 throw ignored;

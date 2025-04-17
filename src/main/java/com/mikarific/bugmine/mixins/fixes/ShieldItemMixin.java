@@ -1,6 +1,6 @@
 package com.mikarific.bugmine.mixins.fixes;
 
-import com.mikarific.bugmine.config.Config;
+import com.mikarific.bugmine.config.ServerConfig;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ShieldItem;
@@ -18,7 +18,7 @@ public class ShieldItemMixin extends Item {
 
     @Inject(method = "use", at = @At("RETURN"), cancellable = true)
     private void functionalShields(World world, PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
-        if (Config.functionalShields) {
+        if (ServerConfig.functionalShields) {
             cir.setReturnValue(super.use(world, player, hand));
         }
     }
