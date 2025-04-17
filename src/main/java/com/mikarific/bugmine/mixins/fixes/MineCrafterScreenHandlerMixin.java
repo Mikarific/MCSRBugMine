@@ -2,7 +2,6 @@ package com.mikarific.bugmine.mixins.fixes;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.mikarific.bugmine.config.ClientConfig;
 import com.mikarific.bugmine.config.ServerConfig;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.screen.MineCrafterScreenHandler;

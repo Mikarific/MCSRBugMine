@@ -105,6 +105,7 @@ public class BugMineCommand {
         }
 
         if (field.isAnnotationPresent(TriggerReload.class)) {
+            //noinspection resource
             source.method_69818().reloadResources(source.method_69818().getDataPackManager().getEnabledIds()).exceptionally((throwable) -> {
                 LogUtils.getLogger().warn("Failed to execute reload", throwable);
                 return null;
@@ -113,6 +114,7 @@ public class BugMineCommand {
 
         saveOption(option);
 
+        //noinspection resource
         for (ServerPlayerEntity player : ServerNetworkingHandler.getPlayersWithClientMod(source.method_69818().getPlayerManager())) {
             ServerPlayNetworking.send(player, new BugMineConfigPayloadS2C(option, parsedValue.toString()));
         }

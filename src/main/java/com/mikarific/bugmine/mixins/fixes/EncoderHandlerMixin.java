@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(EncoderHandler.class)
 public class EncoderHandlerMixin<T extends PacketListener> {
+    @SuppressWarnings({"CatchMayIgnoreException", "CallToPrintStackTrace"})
     @WrapMethod(method = "encode(Lio/netty/channel/ChannelHandlerContext;Lnet/minecraft/network/packet/Packet;Lio/netty/buffer/ByteBuf;)V")
     private void preventPacketDisconnect(ChannelHandlerContext channelHandlerContext, Packet<T> packet, ByteBuf byteBuf, Operation<Void> original) {
         try {

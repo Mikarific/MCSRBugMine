@@ -35,13 +35,4 @@ public class ClientConfig {
     public static String[] getOptions() {
         return Arrays.stream(ClientConfig.class.getFields()).filter((field) -> field.isAnnotationPresent(SerialEntry.class)).map(Field::getName).toArray(String[]::new);
     }
-
-    public static String[] getValues(String option) {
-        try {
-            if (ClientConfig.class.getField(option).getType() == boolean.class) return new String[]{"true", "false"};
-            return new String[]{};
-        } catch (NoSuchFieldException e) {
-            return new String[]{};
-        }
-    }
 }

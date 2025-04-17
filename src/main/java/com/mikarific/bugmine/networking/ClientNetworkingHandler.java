@@ -14,9 +14,11 @@ public class ClientNetworkingHandler {
     private static final String VERSION = FabricLoader.getInstance().getModContainer("bugmine").map(mod -> mod.getMetadata().getVersion().getFriendlyString()).orElse("unknown");
     private static boolean MATCHING_SERVER = false;
 
+    @SuppressWarnings("CallToPrintStackTrace")
     public static void register() {
         ClientPlayConnectionEvents.JOIN.register((handler, sender, server) -> ClientPlayNetworking.send(new BugMineInitPayloadC2S(VERSION)));
 
+        //noinspection resource
         ClientPlayNetworking.registerGlobalReceiver(BugMineInitPayloadS2C.ID, (payload, context) -> context.client().execute(() -> MATCHING_SERVER = true));
 
         ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
@@ -24,6 +26,7 @@ public class ClientNetworkingHandler {
             ServerConfig.load();
         });
 
+        //noinspection resource
         ClientPlayNetworking.registerGlobalReceiver(BugMineConfigPayloadS2C.ID, (payload, context) -> context.client().execute(() -> {
             try {
                 Object parsedValue = null;

@@ -31,6 +31,7 @@ public class ServerNetworkingHandler {
     private static final Map<String, String> LANG_MAP = new HashMap<>();
     private static final Set<UUID> MATCHING_PLAYERS = new HashSet<>();
 
+    @SuppressWarnings("CallToPrintStackTrace")
     public static void register() {
         PayloadTypeRegistry.playC2S().register(BugMineInitPayloadC2S.ID, BugMineInitPayloadC2S.CODEC);
         PayloadTypeRegistry.playS2C().register(BugMineInitPayloadS2C.ID, BugMineInitPayloadS2C.CODEC);
@@ -38,6 +39,7 @@ public class ServerNetworkingHandler {
         PayloadTypeRegistry.playS2C().register(BugMineConfigPayloadS2C.ID, BugMineConfigPayloadS2C.CODEC);
         PayloadTypeRegistry.playC2S().register(BugMineConfigPayloadC2S.ID, BugMineConfigPayloadC2S.CODEC);
 
+        //noinspection resource
         ServerPlayNetworking.registerGlobalReceiver(BugMineInitPayloadC2S.ID, (payload, context) -> context.server().execute(() -> {
             MATCHING_PLAYERS.add(context.player().getUuid());
             ServerPlayNetworking.send(context.player(), new BugMineInitPayloadS2C(VERSION));
@@ -53,6 +55,7 @@ public class ServerNetworkingHandler {
 
         ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> MATCHING_PLAYERS.remove(handler.getPlayer().getUuid()));
 
+        //noinspection resource
         ServerPlayNetworking.registerGlobalReceiver(BugMineConfigPayloadC2S.ID, (payload, context) -> context.server().execute(() -> {
             if (context.player().hasPermissionLevel(2)) {
                 try {
@@ -61,7 +64,9 @@ public class ServerNetworkingHandler {
                     if (parsedValue != null) {
                         ServerConfig.class.getField(payload.option()).set(null, parsedValue);
                         ServerConfig.save();
+                        //noinspection resource
                         if (context.server().getGameInstance() != null) {
+                            //noinspection resource
                             for (ServerPlayerEntity player : getPlayersWithClientMod(Objects.requireNonNull(context.server().getGameInstance()).getPlayerManager())) {
                                 ServerPlayNetworking.send(player, new BugMineConfigPayloadS2C(payload.option(), parsedValue.toString()));
                             }
