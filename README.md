@@ -5,7 +5,7 @@
 
 [![fabric](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/supported/fabric_64h.png)](https://modrinth.com/mod/mcsrbugmine/versions?l=fabric)
 ![forge](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/unsupported/forge_64h.png)
-[![discord-singular](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/social/discord-singular_64h.png)](https://discord.gg/jKFC9wjfrm)
+[![discord-singular](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/social/discord-singular_64h.png)](https://discord.gg/jKFC9wjfrm)  
 ![mod version](https://img.shields.io/modrinth/v/mcsrbugmine?style=flat-square&label=Mod%20Version&color=0284c7)
 ![game version](https://img.shields.io/modrinth/game-versions/mcsrbugmine?style=flat-square&label=Minecraft%20Version&color=b91c1c)
 ![modrinth downloads](https://img.shields.io/modrinth/dt/mcsrbugmine?style=flat-square&label=Downloads&color=1e971e)
