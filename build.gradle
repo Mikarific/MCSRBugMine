@@ -19,10 +19,6 @@ repositories {
     // for more information about repositories.
     maven { url 'https://jitpack.io' }
     maven {
-        name 'Xander Maven'
-        url 'https://maven.isxander.dev/releases'
-    }
-    maven {
         name = "Terraformers"
         url = "https://maven.terraformersmc.com/"
     }
@@ -33,30 +29,24 @@ dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    modImplementation "dev.isxander:yet-another-config-lib:${project.yacl_version}"
+    include(modImplementation "com.github.Mikarific:SpeedrunAPI:${project.speedrunapi_version}")
     modCompileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
-    modCompileOnly "com.github.Mikarific:SpeedrunAPI:${project.speedrunapi_version}"
 }
 
 processResources {
     inputs.property "version", project.version
     inputs.property "minecraft_version", project.minecraft_version
     inputs.property "loader_version", project.loader_version
-    inputs.property "fabric_version", project.fabric_version
-    inputs.property "yacl_version", project.yacl_version
-    inputs.property "modmenu_version", project.modmenu_version
     inputs.property "speedrunapi_version", project.speedrunapi_version
+    inputs.property "modmenu_version", project.modmenu_version
     filteringCharset "UTF-8"
 
     filesMatching("fabric.mod.json") {
         expand "version": project.version,
                 "minecraft_version": project.minecraft_version,
                 "loader_version": project.loader_version,
-                "fabric_version": project.fabric_version,
-                "yacl_version": project.yacl_version,
-                "modmenu_version": project.modmenu_version,
-                "speedrunapi_version": project.speedrunapi_version
+                "speedrunapi_version": project.speedrunapi_version,
+                "modmenu_version": project.modmenu_version
     }
 }
 

@@ -1,41 +1,35 @@
 {
   "schemaVersion": 1,
-  "id": "bugmine",
+  "id": "mcsrbugmine",
   "version": "${version}",
-  "name": "BugMine",
-  "description": "A collection of various bug fixes and QoL features for 25w14craftmine.",
-  "authors": [],
+  "name": "MCSR BugMine",
+  "description": "A collection of various bug fixes for 25w14craftmine.",
+  "authors": [
+    "Mikarific"
+  ],
   "contact": {},
   "license": "MIT",
-  "icon": "assets/bugmine/icon.png",
-  "environment": "*",
+  "icon": "assets/mcsrbugmine/icon.png",
+  "environment": "client",
   "entrypoints": {
     "client": [
-      "com.mikarific.bugmine.BugMineClient"
-    ],
-    "main": [
-      "com.mikarific.bugmine.BugMine"
+      "com.mikarific.mcsrbugmine.MCSRBugMine"
     ],
     "modmenu": [
-      "com.mikarific.bugmine.config.integrations.ModMenuIntegration"
+      "com.mikarific.mcsrbugmine.config.integrations.ModMenuIntegration"
     ]
   },
   "mixins": [
-    "bugmine.mixins.json"
+    "mcsrbugmine.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
-    "minecraft": "1.21.6-alpha.25.14.craftmine",
-    "fabric": ">=${fabric_version}",
-    "yet_another_config_lib_v3": ">=${yacl_version}"
+    "minecraft": "1.21.6-alpha.25.14.craftmine"
   },
-  "suggests": {
-    "modmenu": ">=${modmenu_version}",
-    "speedrunapi": ">=${speedrunapi_version}"
-  },
+  "suggests": {},
   "custom": {
     "speedrunapi": {
-      "config": "com.mikarific.bugmine.config.integrations.SpeedrunIntegration"
+      "config": "com.mikarific.mcsrbugmine.config.Config"
     }
   }
 }
