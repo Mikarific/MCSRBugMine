@@ -12,8 +12,7 @@
 
 ---
 ## Overview
-BugMine is a mod for 25w14craftmine that offers *full customizability* over bug fixes and QoL features.  
-Think Carpet Mod meets Tweakeroo but for things *specifically* for 25w14craftmine.
+BugMine is a mod for 25w14craftmine that offers *full customizability* over bug fixes.  
 
 This is the MCSR Edition of [BugMine](https://modrinth.com/mod/bugmine). MCSR BugMine is **not** legal for MCSR, it's just **more** legal than the non-MCSR edition.
 
