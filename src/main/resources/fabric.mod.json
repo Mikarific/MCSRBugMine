@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "mcsrbugmine",
   "version": "${version}",
-  "name": "MCSR BugMine",
+  "name": "BugMine: MCSR Edition",
   "description": "A collection of various bug fixes for 25w14craftmine.",
   "authors": [
     "Mikarific"
